@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.AccessControl;
 using System.Text;
 using System.Threading.Tasks;
 using Entities.Abstract;
@@ -13,7 +14,10 @@ namespace Entities.Concrete
         public int BrandId { get; set; }
         public int ColorId { get; set; }
         public int ModelYear { get; set; }
+        public string CarName { get; set; }
         public decimal DailyPrice { get; set; }
         public string Description { get; set; }
+        
+        
     }
 }

@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using DataAccess.Abstract;
+using DataAccess.Concrete.EntityFramework;
 using Entities.Concrete;
 
 namespace DataAccess.Concrete.InMemory
@@ -31,6 +33,22 @@ namespace DataAccess.Concrete.InMemory
         public List<Car> GetAll()
         {
             return _cars;
+        }
+
+        public List<Car> GetAll(Expression<Func<Car, bool>> filter = null)
+        {
+            using (ReCapContext context = new ReCapContext())
+            {
+                return filter == null
+                    ? context.Set<Car>().ToList()
+                    : context.Set<Car>().Where(filter).ToList();
+
+            }
+        }
+
+        public Car Get(Expression<Func<Car, bool>> filter)
+        {
+            throw new NotImplementedException();
         }
 
         public void Add(Car car)
