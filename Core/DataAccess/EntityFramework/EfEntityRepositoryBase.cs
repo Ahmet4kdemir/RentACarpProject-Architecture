@@ -32,6 +32,7 @@ namespace Core.DataAccess.EntityFramework
             }
         }
 
+
         public void Add(TEntity entity)
         {
             using (Tcontext context = new Tcontext())
@@ -39,17 +40,30 @@ namespace Core.DataAccess.EntityFramework
                 var addedEntity = context.Entry(entity);
                 addedEntity.State = EntityState.Added;
                 context.SaveChanges();
+                Console.WriteLine(" Added!");
             }
         }
 
         public void Update(TEntity entity)
         {
-            throw new NotImplementedException();
+            using (Tcontext context = new Tcontext())
+            {
+                var UpdatedEntity = context.Entry(entity);
+                UpdatedEntity.State = EntityState.Modified;
+                context.SaveChanges();
+                Console.WriteLine("updated!");
+            }
         }
 
         public void Delete(TEntity entity)
         {
-            throw new NotImplementedException();
+            using (Tcontext context = new Tcontext())
+            {
+                var DeletedEntity = context.Entry(entity);
+                DeletedEntity.State = EntityState.Deleted;
+                context.SaveChanges();
+                Console.WriteLine("deleted!");
+            }
         }
     }
 }

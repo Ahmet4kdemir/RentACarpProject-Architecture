@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Business.Abstract;
 using DataAccess.Abstract;
 using Entities.Concrete;
+using Entities.DTOs;
 
 namespace Business.Concrete
 {
@@ -23,6 +24,7 @@ namespace Business.Concrete
             return _carDal.GetAll();
         }
 
+        
         public List<Car> GetCarsByBrandId(int brandId)
         {
             return _carDal.GetAll(c => c.BrandId == brandId);
@@ -31,6 +33,16 @@ namespace Business.Concrete
         public List<Car> GetCarsByColorId(int colorId)
         {
             return _carDal.GetAll(c => c.ColorId == colorId);
+        }
+
+        public List<Car> GetCarById(int carId)
+        {
+            return _carDal.GetAll(c => c.CarId == carId);
+        }
+
+        public List<CarDetailDto> GetCarDetails()
+        {
+            return _carDal.GetCarDetails();
         }
 
         public void Add(Car car)
@@ -45,6 +57,16 @@ namespace Business.Concrete
                 Console.WriteLine("Car name must be min 2 character and daily price higher than 0");
             }
             
+        }
+
+        public void Delete(Car car)
+        {
+            _carDal.Delete(car);
+        }
+
+        public void Update(Car car)
+        {
+            _carDal.Update(car);
         }
     }
 }
