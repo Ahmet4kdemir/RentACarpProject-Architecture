@@ -28,7 +28,7 @@ namespace ConsoleUI
             //GetColorById(colorService);
             //GetAllColors(colorService);
             var result = carService.GetCarDetails();
-            foreach (var car in result)
+            foreach (var car in result.Data)
             {
                 Console.WriteLine(car.CarName+" "+car.BrandName+" "+car.ColorName+" "+car.DailyPrice);
             }
@@ -70,7 +70,7 @@ namespace ConsoleUI
         private static void GetCarById(ICarService carService)
         {
             var result = carService.GetCarById(5);
-            foreach (var car in result)
+            foreach (var car in result.Data)
             {
                 Console.WriteLine(car.CarName);
             }
@@ -79,7 +79,7 @@ namespace ConsoleUI
         private static void CarGetAll(ICarService carService)
         {
             var result = carService.GetAll();
-            foreach (var car in result)
+            foreach (var car in result.Data)
             {
                 Console.WriteLine(car.CarName + " " + car.Description);
             }
