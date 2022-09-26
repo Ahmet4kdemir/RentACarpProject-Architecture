@@ -16,7 +16,18 @@ namespace ConsoleUI
             ICarService carService = new CarManager(new EfCarDal());
             IColorService colorService = new ColorManager(new EfColorDal());
             IBrandService brandService = new BrandManager(new EfBrandDal());
-            
+            ICustomerService customerService = new CustomerManager(new EfCustomerDal());
+            IUserService userService = new UserManager(new EfUserDal());
+            IRentalService rentalManager = new RentalManager(new EfRentalDal());
+
+            //rentalManager.Add(new Rental()
+            //{
+            //    CarId = 2, CustomerId = 1, RentDate = new DateTime(2022, 09, 26),
+            //    ReturnDate = new DateTime(2022, 11, 27)
+            //});
+
+
+
             //AddCar(carService);
             //DeleteCar(carService);
             //UpdateCar(carService);
@@ -27,17 +38,22 @@ namespace ConsoleUI
             //UpdateColor(colorService);
             //GetColorById(colorService);
             //GetAllColors(colorService);
+            //GetCarDetailss(carService);
+        }
+
+        private static void GetCarDetailss(ICarService carService)
+        {
             var result = carService.GetCarDetails();
             foreach (var car in result.Data)
             {
-                Console.WriteLine(car.CarName+" "+car.BrandName+" "+car.ColorName+" "+car.DailyPrice);
+                Console.WriteLine(car.CarName + " " + car.BrandName + " " + car.ColorName + " " + car.DailyPrice);
             }
         }
 
         private static void GetAllColors(IColorService colorService)
         {
             var result = colorService.GetAll();
-            foreach (var color in result)
+            foreach (var color in result.Data)
             {
                 Console.WriteLine(color.ColorName);
             }
@@ -46,7 +62,7 @@ namespace ConsoleUI
         private static void GetColorById(IColorService colorService)
         {
             var result = colorService.GetColorById(4);
-            foreach (var color in result)
+            foreach (var color in result.Data)
             {
                 Console.WriteLine(color.ColorName);
             }

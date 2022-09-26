@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Business.Abstract;
+using Business.Constants;
+using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
 
@@ -18,19 +20,20 @@ namespace Business.Concrete
             _colorDal = colorDal;
         }
 
-        public List<Color> GetAll()
+        public IDataResult<List<Color>> GetAll()
         {
-            return _colorDal.GetAll();
+            return new SuccessDataResult<List<Color>>(_colorDal.GetAll());
         }
 
-        public List<Color> GetColorById(int colorId)
+        public IDataResult<List<Color>> GetColorById(int colorId)
         {
-            return _colorDal.GetAll(c => c.ColorId == colorId);
+            return new SuccessDataResult<List<Color>>(_colorDal.GetAll(c => c.ColorId == colorId));
         }
 
-        public void Add(Color color)
+        public IResult Add(Color color)
         {
             _colorDal.Add(color);
+            return new SuccessResult(Messages.ProductAdded);
         }
 
         public void Delete(Color color)
